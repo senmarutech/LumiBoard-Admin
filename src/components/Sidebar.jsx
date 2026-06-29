@@ -1,11 +1,11 @@
-import { Boxes, ChevronDown, ChevronRight, FileText, LayoutDashboard, LineChart, Mail, Package, Settings, Shield, ShoppingBag, Tags, UserPlus, Users } from "lucide-react"
+import { Boxes, ChevronDown, ChevronRight, FileText, HomeIcon, LayoutDashboard, LineChart, Mail, Package, Settings, Shield, ShoppingBag, Tags, UserPlus, Users } from "lucide-react"
 import { useState } from "react"
 
 
 const Sidebar = ({ onCloseDrawer }) => {
     const [links, setLinks] = useState([
         {name: "Dashboard", icon: LayoutDashboard, active: true},
-        {name: "Analtics", icon: LineChart, active: false},
+        {name: "Analytics", icon: LineChart, active: false},
         {name: "Reports", icon: FileText, active: false},
         {name: "Users", icon: Users, active: false, open: true,
             children: [
@@ -60,6 +60,10 @@ const Sidebar = ({ onCloseDrawer }) => {
                                 ? `bg-[#ece883]/20 text-[#ece883] border-l-2 border-[#ece883]`
                                 : `text-gray-300 hover:bg-white/10`
                             }`}>
+                                {/* Icon */}
+                                <link.icon className={`w-5 h-5 transition-transform group-hover:scale-105
+                                    ${link.active ? 'text-[#ece883]' : 'text-gray-400'}`}/>
+
                                 <span className="flex-1 text-left text-sm font-medium">{link.name}</span>
                                 {link.badge && (
                                     <span className="bg-[#ece883] text-gray-900 text-xs px-2 py-0.5 rounded-full
@@ -97,8 +101,23 @@ const Sidebar = ({ onCloseDrawer }) => {
                 ))}
             </ul>
         </nav>
+        {/* Footer */}
+        <div className="absolute lg:bottom-3 md:bottom-3 bottom-16 left-4 right-4">
+            <button onClick={() => {
+                if (onCloseDrawer && window.innerWidth < 768) onCloseDrawer();
+            }}
+            className="w-full p-4 bg-[#ece883] rounded-xl transition-all duration-200
+            hover:bg-[#ece883] active:scale-95 group">
+                <div className="flex items-center justify-center gap-2">
+                    <HomeIcon className="2-4 h-4 text-gray-900"/>
+                    <span className="text-sm font-semibold text-gray-900">
+                        Return to Homepage
+                    </span>
+                </div>
+            </button>
+        </div>
     </aside>
-  )
-}
+  );
+};
 
 export default Sidebar

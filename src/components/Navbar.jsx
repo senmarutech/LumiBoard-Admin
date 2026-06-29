@@ -20,10 +20,10 @@ const Navbar = ({ isDark, onToggleDrawer, onToggleTheme}) => {
                     </button>
                     <div className="hidden sm:block">
                         <h2 className="text-3xl font-semibold text-gray-800 dark:text-white">
-                            Welcome back senmarutech 👋
+                            Welcome senmarutech 👋
                         </h2>
                         <p className="text-lg text-gray-500 dark:text-gray-400">
-                            Have a nice day!
+                            Have a nice day Ma Bro! Demn
                         </p>
                     </div>
                 </div>

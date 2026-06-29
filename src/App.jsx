@@ -1,9 +1,18 @@
 import { useEffect, useState } from "react"
 import Navbar from "./components/Navbar"
 import Sidebar from "./components/Sidebar";
+import StatsCards from "./components/StatsCards";
+import Charts from "./components/Charts";
 
 const App = () => {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      return savedTheme === 'dark';
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   
@@ -20,17 +29,6 @@ const App = () => {
     handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if(savedTheme) {
-      setIsDark(savedTheme === 'dark');
-    } else if (systemPrefersDark) {
-      setIsDark(true);
-    }
   }, []);
 
   useEffect(() => {
@@ -81,6 +79,10 @@ const App = () => {
         onToggleDrawer={toggleDrawer}
         onToggleTheme={toggleTheme}
         isMobile={isMobile}/>
+        <main className="flex-1 p-6">
+          <StatsCards />
+          <Charts />
+        </main>
       </div>
     </div>
   )
